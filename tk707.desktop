@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=TK-707
+Comment=Drum sequencer for a sound card or MIDI device
+Exec=tk707
+Icon=tk707
+Categories=AudioVideo;X-Jack;Midi;X-MIDI;
+Terminal=false
+Type=Application

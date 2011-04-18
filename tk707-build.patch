@@ -1,0 +1,51 @@
+--- tk707-0.8/Makefile.am~	2004-11-03 12:51:26.000000000 +0100
++++ tk707-0.8/Makefile.am	2011-04-18 22:55:44.769675336 +0200
+@@ -151,11 +151,11 @@
+ $(srcdir)/ports.c: ports.tcl tcl2c
+ 	./tcl2c tcl_ports < $(srcdir)/ports.tcl > $(srcdir)/ports.c
+ $(srcdir)/defs.c: defs.tcl tcl2c
+-	sed -e 's%set VERSION.*%set VERSION $(VERSION)%' < $(srcdir)/defs.tcl | ./tcl2c tcl_defs > $(srcdir)/defs.c
++	sed -e 's%set VERSION[^\\]*\\%set VERSION $(VERSION)\\%' < $(srcdir)/defs.tcl | ./tcl2c tcl_defs > $(srcdir)/defs.c
+ $(srcdir)/playa.c: play.c
+ 	sed '1,8s%^$$%#define not_compile_tcl%' $(srcdir)/play.c > $(srcdir)/playa.c
+ $(srcdir)/defsa.c: defs.c
+-	sed 's%set PKGDATADIR.*%set PKGDATADIR $(pkgdatadir)%' $(srcdir)/defs.c > $(srcdir)/defsa.c
++	sed 's%set PKGDATADIR[^\\]*\\%set PKGDATADIR $(pkgdatadir)\\%' $(srcdir)/defs.c > $(srcdir)/defsa.c
+ $(srcdir)/title.c: title.tcl tcl2c
+ 	./tcl2c tcl_title < $(srcdir)/title.tcl > $(srcdir)/title.c
+ $(srcdir)/title_defs.c: title_defs.tcl tcl2c
+@@ -189,8 +189,9 @@
+ 
+ install-exec-local: tk707bin tk707.sh
+ 	$(mkinstalldirs) $(DESTDIR)$(bindir)
+-	sh $(srcdir)/install-sh -s -c tk707bin $(DESTDIR)$(bindir)/tk707bin
+ 	$(INSTALL_SCRIPT) tk707.sh $(DESTDIR)$(bindir)/tk707
++	$(mkinstalldirs) $(DESTDIR)$(libdir)/tk707
++	sh $(srcdir)/install-sh -s -c tk707bin $(DESTDIR)$(libdir)/tk707/tk707bin
+ 
+ uninstall-local:
+ 	/bin/rm -f $(DESTDIR)$(bindir)/tk707
+--- tk707-0.8/defs.c~	2011-04-18 22:52:49.069675335 +0200
++++ tk707-0.8/defs.c	2011-04-18 22:52:51.782675337 +0200
+@@ -1,4 +1,4 @@
+-"char tcl_defs[] = ""
++char tcl_defs[] = ""
+ "#\n"
+ "#    This file is part of tk707.\n"
+ "#\n"
+--- tk707-0.8/tk707.sh.in~	2004-11-03 12:17:28.000000000 +0100
++++ tk707-0.8/tk707.sh.in	2011-04-18 22:57:07.318675335 +0200
+@@ -2,11 +2,10 @@
+ args=""
+ for x in $*; do
+     case $x in
+-    -h|-help) args="$args --help";; # tcl/tk catch these options...
++    -h|-help) args="$args --help";; # tcl/tk catches these options...
+     *)        args="$args $x";;
+   esac
+ done
+ prefix=@prefix@
+ exec_prefix=@exec_prefix@
+-echo | @bindir@/tk707bin $args
+-
++echo | @libdir@/tk707/tk707bin $args
