@@ -2,7 +2,7 @@ Summary:	Drum sequencer for a sound card or MIDI device
 #Summary(pl.UTF-8):	-
 Name:		tk707
 Version:	0.8
-Release:	0.1
+Release:	1
 License:	GPL v2
 Group:		Applications/Multimedia
 Source0:	http://www-ljk.imag.fr/membres/Pierre.Saramito/tk707/download/%{name}-%{version}.tar.gz
@@ -66,6 +66,9 @@ install -d $RPM_BUILD_ROOT%{_desktopdir}
 	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/html
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
