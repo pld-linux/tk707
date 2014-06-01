@@ -2,7 +2,7 @@ Summary:	Drum sequencer for a sound card or MIDI device
 #Summary(pl.UTF-8):	-
 Name:		tk707
 Version:	0.8
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Applications/Multimedia
 Source0:	http://www-ljk.imag.fr/membres/Pierre.Saramito/tk707/download/%{name}-%{version}.tar.gz
