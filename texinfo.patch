@@ -1,0 +1,15 @@
+--- tk707-0.8/gpl.texi~	2014-06-11 10:09:13.000000000 +0200
++++ tk707-0.8/gpl.texi	2014-06-11 10:09:30.913488246 +0200
+@@ -284,12 +284,7 @@
+ of preserving the free status of all derivatives of our free software and
+ of promoting the sharing and reuse of software generally.
+ 
+-@iftex
+-@heading NO WARRANTY
+-@end iftex
+-@ifinfo
+ @center NO WARRANTY
+-@end ifinfo
+ 
+ @item
+ BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY

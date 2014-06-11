@@ -2,13 +2,14 @@ Summary:	Drum sequencer for a sound card or MIDI device
 #Summary(pl.UTF-8):	-
 Name:		tk707
 Version:	0.8
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Applications/Multimedia
 Source0:	http://www-ljk.imag.fr/membres/Pierre.Saramito/tk707/download/%{name}-%{version}.tar.gz
 # Source0-md5:	7471494195c053f048862c292320d06c
 Source1:	%{name}.desktop
 Patch0:		%{name}-build.patch
+Patch1:		texinfo.patch
 URL:		http://www-ljk.imag.fr/membres/Pierre.Saramito/tk707/
 BuildRequires:	alsa-lib-devel
 BuildRequires:	autoconf
@@ -43,6 +44,7 @@ to emulate one.
 %setup -q
 %{__sed} -i -e 's|\\$|"|g' -e 's|^|"|g' defs.c
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__aclocal}
