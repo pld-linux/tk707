@@ -1,8 +1,7 @@
 Summary:	Drum sequencer for a sound card or MIDI device
-#Summary(pl.UTF-8):	-
 Name:		tk707
 Version:	0.8
-Release:	3
+Release:	4
 License:	GPL v2
 Group:		Applications/Multimedia
 Source0:	http://www-ljk.imag.fr/membres/Pierre.Saramito/tk707/download/%{name}-%{version}.tar.gz
@@ -32,11 +31,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This program emulates the operation of Roland's TR-707 Rhythm
 Composer.
 
-The output is to a MIDI device, sound card or file.
-A Latin-percussion instrument map emulates the Roland TR-727 and
-the instrument map can be customized by the user. If you do not
-have a MIDI sound card, you should install the timidity package
-to emulate one.
+The output is to a MIDI device, sound card or file. A Latin-percussion
+instrument map emulates the Roland TR-727 and the instrument map can
+be customized by the user. If you do not have a MIDI sound card, you
+should install the timidity package to emulate one.
 
 #%description -l pl.UTF-8
 
@@ -67,12 +65,18 @@ install -d $RPM_BUILD_ROOT%{_desktopdir}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 
 %{__rm} -r $RPM_BUILD_ROOT%{_datadir}/html
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post	-p /sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
+
+%postun	-p /sbin/postshell
+-/usr/sbin/fix-info-dir -c %{_infodir}
 
 %files
 %defattr(644,root,root,755)
